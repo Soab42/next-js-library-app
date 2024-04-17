@@ -1,4 +1,4 @@
-const buttons = ['add', 'update', 'search', 'delete', 'display', 'close']
+const buttons = ['add', 'update', 'search', 'delete']
 
 const Buttons = () => {
   return (

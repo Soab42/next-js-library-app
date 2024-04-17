@@ -1,14 +1,51 @@
+import { addBook } from '@/lib/book-data'
 import { formElements, options } from '@/util/constants'
+import { revalidateTag } from 'next/cache'
+import { z } from 'zod'
 import BookTypeSelector from './BookTypeSelector'
 import Buttons from './Buttons'
 import FormRow from './FormRow'
 
+const bookInputSchema = z.object({
+  book_name: z.string(),
+  author_name: z.string(),
+  book_type: z.enum([
+    'Novel',
+    'Poem',
+    'Story',
+    'Science Fiction',
+    'Comic',
+    'Mathematics',
+  ]),
+  book_language: z.string(),
+  book_publisher: z.string(),
+  book_price: z.number(),
+  entry_date: z.string(),
+})
+
 const BookForm = () => {
   const submitForm = async (formData: FormData) => {
     'use server'
-    const rawFormData = Object.fromEntries(formData)
 
-    console.log(rawFormData)
+    const bookData = Object.fromEntries(formData)
+
+    console.log(bookData)
+    const validatedFields = bookInputSchema.safeParse({
+      ...bookData,
+      book_price: Number(bookData.book_price),
+    })
+
+    if (!validatedFields.success) {
+      const error = {
+        errors: validatedFields.error.flatten().fieldErrors,
+      }
+      console.log(error)
+
+      return error
+    } else {
+      await addBook(bookData)
+      revalidateTag('books')
+    }
   }
 
   return (

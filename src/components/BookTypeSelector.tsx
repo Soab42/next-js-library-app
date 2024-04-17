@@ -4,7 +4,10 @@ const BookTypeSelector = ({ options }: { options: string[] }) => {
       <label className='w-32' htmlFor='Book type'>
         Book Type
       </label>
-      <select className='select select-primary w-full max-w-xs *:bg-white-500'>
+      <select
+        name='book_type'
+        className='select select-primary w-full max-w-xs *:bg-white-500'
+      >
         {options.map((option) => (
           <option key={option}>{option}</option>
         ))}
