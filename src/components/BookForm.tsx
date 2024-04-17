@@ -3,7 +3,6 @@ import { formElements, options } from '@/util/constants'
 import { revalidateTag } from 'next/cache'
 import { z } from 'zod'
 import BookTypeSelector from './BookTypeSelector'
-import Buttons from './Buttons'
 import FormRow from './FormRow'
 
 const bookInputSchema = z.object({
@@ -29,7 +28,6 @@ const BookForm = () => {
 
     const bookData = Object.fromEntries(formData)
 
-    console.log(bookData)
     const validatedFields = bookInputSchema.safeParse({
       ...bookData,
       book_price: Number(bookData.book_price),
@@ -39,11 +37,10 @@ const BookForm = () => {
       const error = {
         errors: validatedFields.error.flatten().fieldErrors,
       }
-      console.log(error)
 
       return error
     } else {
-      await addBook(bookData)
+      await addBook(bookData as any)
       revalidateTag('books')
     }
   }
@@ -71,7 +68,9 @@ const BookForm = () => {
           return <FormRow key={el} title={el} />
         }
       })}
-      <Buttons />
+      <button type='submit' className='btn-outline btn-primary btn'>
+        Add Book
+      </button>
     </form>
   )
 }

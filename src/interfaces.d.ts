@@ -12,5 +12,5 @@ export interface Book {
   book_language: string
   book_publisher: string
   book_price: number
-  entry_date: Date
+  entry_date: String
 }
