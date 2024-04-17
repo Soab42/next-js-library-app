@@ -24,7 +24,7 @@ const BookItem = ({ book, index }: { book: Book; index: number }) => {
       animate={{ x: 0, opacity: 1 }}
     >
       <Link
-        href={`/books/${_id}`}
+        href={`/library/books/${_id}`}
         className='flex w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800'
       >
         <div className='flex items-center justify-center w-12 bg-blue-500'>

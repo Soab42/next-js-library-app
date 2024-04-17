@@ -17,6 +17,19 @@ export const getBooks = async () => {
     console.log(error)
   }
 }
+export const getBook = async (id: string) => {
+  try {
+    const res = await fetch(`${URL}/${id}`)
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch book')
+    }
+
+    return await res.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 export const addBook = async (data: Book) => {
   try {
