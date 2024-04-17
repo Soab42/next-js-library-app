@@ -5,13 +5,9 @@ const BookTypeSelector = ({ options }: { options: string[] }) => {
         Book Type
       </label>
       <select className='select select-primary w-full max-w-xs *:bg-white-500'>
-        <option disabled selected>
-          Select Book Type
-        </option>
-        <option>Game of Thrones</option>
-        <option>Lost</option>
-        <option>Breaking Bad</option>
-        <option>Walking Dead</option>
+        {options.map((option) => (
+          <option key={option}>{option}</option>
+        ))}
       </select>
     </div>
   )

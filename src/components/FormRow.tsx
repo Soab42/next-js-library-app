@@ -5,6 +5,7 @@ const FormRow = ({ title }: { title: string }) => {
         {title}
       </label>
       <input
+        name={title.toLowerCase().split(' ').join('_')}
         type='text'
         placeholder={title}
         className='input input-bordered input-primary w-full max-w-xs'
