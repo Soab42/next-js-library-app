@@ -10,7 +10,6 @@ export default function RootLayout({
       <main className='flex justify-center items-center h-[90vh]'>
         {libraryContainer}
       </main>
-      {/* {children} */}
     </>
   )
 }

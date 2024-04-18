@@ -1,5 +1,4 @@
 'use client'
-import { submitForm } from '@/app/actions'
 import { addBook } from '@/lib/book-data'
 import { formElements, options } from '@/util/constants'
 import { useFormState } from 'react-dom'
@@ -11,9 +10,8 @@ const initialState = {
 }
 
 const BookForm = () => {
-  const [state, formAction] = useFormState(submitForm, initialState)
-
-  console.log(state)
+  // @ts-ignore
+  const [state, formAction] = useFormState(addBook, initialState)
 
   return (
     <form className='mt-6 flex flex-col gap-4' action={formAction}>
@@ -38,7 +36,17 @@ const BookForm = () => {
           return <FormRow key={el} title={el} />
         }
       })}
-      <p>{}</p>
+      {/* mapping the errors */}
+      {state?.errors && (
+        <p className='text-red-500 font-bold text-xl'>
+          Errors:{' '}
+          {Object.values(state?.errors)
+            .map((err: any) => {
+              return err[0]
+            })
+            .join(', ')}
+        </p>
+      )}
       <button type='submit' className='btn-outline btn-primary btn'>
         Add Book
       </button>
