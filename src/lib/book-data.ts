@@ -32,7 +32,7 @@ export const getBook = async (id: string) => {
 
 export const addBook = async (data: Book) => {
   try {
-    const res = await fetch(URL, {
+    const res = await fetch('http://localhost:3000/api/books', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ export const addBook = async (data: Book) => {
 
 export const deleteBook = async (id: string) => {
   try {
-    const res = await fetch(`${URL}/${id}`, {
+    const res = await fetch(`http://localhost:3000/api/books/${id}`, {
       method: 'DELETE',
     })
 

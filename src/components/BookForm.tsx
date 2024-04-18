@@ -1,52 +1,22 @@
+'use client'
+import { submitForm } from '@/app/actions'
 import { addBook } from '@/lib/book-data'
 import { formElements, options } from '@/util/constants'
-import { revalidateTag } from 'next/cache'
-import { z } from 'zod'
+import { useFormState } from 'react-dom'
 import BookTypeSelector from './BookTypeSelector'
 import FormRow from './FormRow'
 
-const bookInputSchema = z.object({
-  book_name: z.string(),
-  author_name: z.string(),
-  book_type: z.enum([
-    'Novel',
-    'Poem',
-    'Story',
-    'Science Fiction',
-    'Comic',
-    'Mathematics',
-  ]),
-  book_language: z.string(),
-  book_publisher: z.string(),
-  book_price: z.number(),
-  entry_date: z.string(),
-})
+const initialState = {
+  errors: '',
+}
 
 const BookForm = () => {
-  const submitForm = async (formData: FormData) => {
-    'use server'
+  const [state, formAction] = useFormState(submitForm, initialState)
 
-    const bookData = Object.fromEntries(formData)
-
-    const validatedFields = bookInputSchema.safeParse({
-      ...bookData,
-      book_price: Number(bookData.book_price),
-    })
-
-    if (!validatedFields.success) {
-      const error = {
-        errors: validatedFields.error.flatten().fieldErrors,
-      }
-
-      return error
-    } else {
-      await addBook(bookData as any)
-      revalidateTag('books')
-    }
-  }
+  console.log(state)
 
   return (
-    <form className='mt-6 flex flex-col gap-4' action={submitForm}>
+    <form className='mt-6 flex flex-col gap-4' action={formAction}>
       {formElements.map((el) => {
         if (el === 'Book Type') {
           return <BookTypeSelector key='book type' options={options} />
@@ -68,6 +38,7 @@ const BookForm = () => {
           return <FormRow key={el} title={el} />
         }
       })}
+      <p>{}</p>
       <button type='submit' className='btn-outline btn-primary btn'>
         Add Book
       </button>

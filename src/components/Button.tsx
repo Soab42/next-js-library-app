@@ -1,6 +1,8 @@
 'use client'
+import revalidate from '@/app/actions'
 import { deleteBook } from '@/lib/book-data'
 import { motion } from 'framer'
+import { useRouter } from 'next/navigation'
 import { ReactNode } from 'react'
 
 const Button = ({
@@ -14,9 +16,12 @@ const Button = ({
   className: string
   id?: string
 }) => {
+  const router = useRouter()
   const handleDelete = async (id: string) => {
     try {
       await deleteBook(id)
+      revalidate('books')
+      router.push('/library')
     } catch (error) {
       console.log(error)
     }

@@ -1,5 +1,4 @@
 import { Book } from '@/interfaces'
-import { deleteBook } from '@/lib/book-data'
 import { BiEdit } from 'react-icons/bi'
 import { MdDelete } from 'react-icons/md'
 import Button from './Button'

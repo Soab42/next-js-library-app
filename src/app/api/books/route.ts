@@ -25,7 +25,7 @@ export const POST = async (req: NextRequest) => {
       book_language: body.book_language,
       book_publisher: body.book_publisher,
       book_price: body.book_price,
-      entry_date: body.entry_date,
+      entry_date: body.entry_date || new Date(),
     }
 
     if (bookObj.book_name) {
