@@ -1,4 +1,4 @@
-const BASE_URL = 'http://next-js-library-app-6hia.vercel.app/api'
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL
 
 const formElements = [
   'Book Name',
