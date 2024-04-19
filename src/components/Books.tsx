@@ -46,7 +46,7 @@ const Books = ({ books }: { books: Book[] }) => {
       <BookItem book={book} key={book._id} index={index} />
     ))
   } else {
-    return books.map((book: Book, index: number) => (
+    return books?.map((book: Book, index: number) => (
       <BookItem book={book} key={book._id} index={index} />
     ))
   }
