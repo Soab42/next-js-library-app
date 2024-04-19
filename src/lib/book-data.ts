@@ -4,7 +4,7 @@ import { BASE_URL } from '@/util/constants'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
-const URL = `http://localhost:3000/api/books`
+const URL = `${BASE_URL}/api/books`
 
 export const getBooks = async () => {
   console.log(URL)
