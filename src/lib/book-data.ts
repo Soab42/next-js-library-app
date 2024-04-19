@@ -4,9 +4,10 @@ import { BASE_URL } from '@/util/constants'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
-// const URL = `${BASE_URL}/books`
+const URL = `http://localhost:3000/api/books`
 
 export const getBooks = async () => {
+  console.log(URL)
   try {
     const res = await fetch(URL, { next: { tags: ['books'] } })
 

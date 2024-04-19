@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const DATABASE_URL = process.env.DATABASE_URL
+const DATABASE_URL = process.env.NEXT_PUBLIC_DATABASE_URL
 const cached: {
   connection?: typeof mongoose
   promise?: Promise<typeof mongoose>
