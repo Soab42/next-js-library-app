@@ -19,7 +19,7 @@ const BookTypeSelector = ({
         name='book_type'
         className={`select ${
           bookEditing ? 'w-[40rem]' : 'w-full'
-        } select-primary w-full *:bg-white-500`}
+        } select-primary *:bg-white-500`}
       >
         {options.map((option) => (
           <option key={option}>{option}</option>

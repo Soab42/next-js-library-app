@@ -30,7 +30,6 @@ export const POST = async (req: NextRequest) => {
 
     if (bookObj.book_name) {
       const book = await Book.create(bookObj)
-      console.log('🚀 ~ POST ~ book:', book)
 
       return NextResponse.json(
         { msg: `New Book ${book.book_name} added`, book },

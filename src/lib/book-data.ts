@@ -58,7 +58,6 @@ export const addBook = async (prevState: any, data: FormData) => {
       ...bookData,
       book_price: Number(bookData.book_price),
     })
-    console.log('🚀 ~ submitForm ~ validatedFields:', validatedFields)
 
     if (!validatedFields.success) {
       const error = {
@@ -93,7 +92,6 @@ export const editBook = async (id: string, data: FormData) => {
       ...bookData,
       book_price: Number(bookData.book_price),
     })
-    console.log('🚀 ~ submitForm ~ validatedFields:', validatedFields)
 
     if (!validatedFields.success) {
       const error = {

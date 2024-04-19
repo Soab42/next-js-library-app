@@ -6,9 +6,10 @@ import { ChangeEvent, useCallback, useEffect, useState } from 'react'
 const SearchInput = () => {
   const [search, setSearch] = useState('')
   const router = useRouter()
+  // debounce
   const debouncedSearch = useDebounce((value: string) => {
     setSearch(value)
-  }, 300)
+  }, 100)
 
   const handleSearchChange = (event: ChangeEvent<any>) => {
     const { value } = event.target
@@ -17,6 +18,8 @@ const SearchInput = () => {
 
   const pathname = usePathname()
   const searchParams = useSearchParams()
+
+  const q = searchParams.get('search')
 
   const createQueryString = useCallback(
     (name: string, value: string) => {
@@ -28,6 +31,16 @@ const SearchInput = () => {
     [searchParams]
   )
 
+  // sync with the query param
+  useEffect(() => {
+    if (q) {
+      setSearch(q)
+    } else {
+      setSearch('')
+    }
+  }, [q])
+
+  // push the query string in the url
   useEffect(() => {
     if (search) {
       router.push(pathname + '?' + createQueryString('search', search))
@@ -39,6 +52,7 @@ const SearchInput = () => {
   return (
     <label className='input input-bordered input-accent flex items-center gap-2 p-1'>
       <input
+        defaultValue={q!}
         onChange={handleSearchChange}
         type='search'
         className='grow'

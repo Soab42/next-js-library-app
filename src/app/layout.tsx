@@ -16,12 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html data-theme='light' lang='en'>
-      <body className={inter.className}>
-        {/* <main className='flex justify-center items-center h-[90vh]'>
-          {libraryContainer}
-        </main> */}
-        {children}
-      </body>
+      <body className={inter.className}>{children}</body>
     </html>
   )
 }

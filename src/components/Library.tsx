@@ -10,7 +10,6 @@ const Library = async () => {
       <h1 className='border-b-black border-b font-semibold'>Books</h1>
       <SearchInput />
       <Books books={books} />
-      <div id='scroll-to-here'></div>
     </div>
   )
 }

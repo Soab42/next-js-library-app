@@ -13,10 +13,10 @@ const BookSlot = async ({ params: { id } }: { params: { id: string } }) => {
       <div className='flex justify-between'>
         <BookForm />
         <Link
-          className='relative left-12 rounded-full bg-gray-500 text-white size-fit p-1'
+          className='hover:scale-110 transition-all relative left-12 rounded-full bg-gray-500 text-white size-fit p-1'
           href='/library'
         >
-          <IoArrowBack className='text-2xl' />
+          <IoArrowBack className='duration-200 text-2xl' />
         </Link>
         <div className='h-96 mt-12 p-2 flex flex-col overflow-auto gap-2 w-[23rem] rounded-md bg-green-300'>
           <BookCard book={book} />
