@@ -1,9 +1,9 @@
 import connectMongo from '@/lib/connectDb'
 import Book from '@/models/book'
-import { NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 
 export const GET = async (
-  _: NextResponse,
+  _: NextRequest,
   {
     params: { name },
   }: {
