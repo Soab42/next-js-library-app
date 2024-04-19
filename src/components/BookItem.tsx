@@ -2,6 +2,7 @@
 import { Book } from '@/interfaces'
 import { motion } from 'framer'
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { AiFillDollarCircle } from 'react-icons/ai'
 import { FaBook } from 'react-icons/fa'
 
@@ -10,11 +11,8 @@ const BookItem = ({ book, index }: { book: Book; index: number }) => {
     _id,
     author_name,
     book_name,
-    book_language,
-    book_publisher,
+
     book_price,
-    book_type,
-    entry_date,
   } = book
   return (
     <motion.div

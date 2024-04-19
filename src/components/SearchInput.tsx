@@ -1,7 +1,49 @@
+'use client'
+import useDebounce from '@/hooks/use-debounce'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { ChangeEvent, useCallback, useEffect, useState } from 'react'
+
 const SearchInput = () => {
+  const [search, setSearch] = useState('')
+  const router = useRouter()
+  const debouncedSearch = useDebounce((value: string) => {
+    setSearch(value)
+  }, 300)
+
+  const handleSearchChange = (event: ChangeEvent<any>) => {
+    const { value } = event.target
+    debouncedSearch(value)
+  }
+
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
+
+  const createQueryString = useCallback(
+    (name: string, value: string) => {
+      const params = new URLSearchParams(searchParams.toString())
+      params.set(name, value)
+
+      return params.toString()
+    },
+    [searchParams]
+  )
+
+  useEffect(() => {
+    if (search) {
+      router.push(pathname + '?' + createQueryString('search', search))
+    } else {
+      router.push(pathname)
+    }
+  }, [search])
+
   return (
-    <label className='input input-bordered flex items-center gap-2 p-1'>
-      <input type='search' className='grow' placeholder='Search' />
+    <label className='input input-bordered input-accent flex items-center gap-2 p-1'>
+      <input
+        onChange={handleSearchChange}
+        type='search'
+        className='grow'
+        placeholder='Search'
+      />
       <svg
         xmlns='http://www.w3.org/2000/svg'
         viewBox='0 0 16 16'

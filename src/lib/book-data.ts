@@ -159,3 +159,17 @@ export const updateBook = async (id: string, data: Book) => {
     console.log(error)
   }
 }
+
+export const searchBook = async (name: string) => {
+  try {
+    const res = await fetch(`http://localhost:3000/api/search/${name}`)
+
+    if (!res.ok) {
+      throw new Error('Failed to fetch book')
+    }
+
+    return await res.json()
+  } catch (error) {
+    console.log(error)
+  }
+}
