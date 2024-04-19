@@ -1,4 +1,5 @@
 import { Book } from '@/interfaces'
+import Link from 'next/link'
 import { BiEdit } from 'react-icons/bi'
 import { MdDelete } from 'react-icons/md'
 import Button from './Button'
@@ -64,13 +65,16 @@ const BookCard = ({ book }: { book: Book }) => {
           </div>
         </div>
         <div className='flex items-center justify-center mt-4 text-white gap-4'>
+          <Link href={`/library/edit/${_id}`}>
+            <Button
+              className='bg-blue-400'
+              icon={<BiEdit className='text-2xl' />}
+            >
+              Edit
+            </Button>
+          </Link>
           <Button
-            className='bg-blue-400'
-            icon={<BiEdit className='text-2xl' />}
-          >
-            Edit
-          </Button>
-          <Button
+            operation='delete'
             id={_id}
             className='bg-gray-400'
             icon={<MdDelete className='text-2xl' />}

@@ -9,12 +9,14 @@ const Button = ({
   icon,
   children,
   className,
+  operation,
   id,
 }: {
   icon: ReactNode
   children: ReactNode
   className: string
   id?: string
+  operation?: string
 }) => {
   const router = useRouter()
   const handleDelete = async (id: string) => {
@@ -31,7 +33,7 @@ const Button = ({
       whileHover={{ y: -4 }}
       whileTap={{ scale: 0.95 }}
       className={`flex gap-2 items-center p-4 ${className} rounded-md`}
-      onClick={() => handleDelete(id as string)}
+      onClick={() => operation === 'delete' && handleDelete(id as string)}
     >
       <p>{children}</p>
       {icon}

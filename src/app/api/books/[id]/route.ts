@@ -41,7 +41,7 @@ export const DELETE = async (
   }
 }
 
-export const PUT = async (
+export const PATCH = async (
   req: NextRequest,
   { params: { id } }: { params: { id: string } }
 ) => {

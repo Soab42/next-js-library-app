@@ -1,6 +1,7 @@
 import revalidate from '@/app/actions'
 import { Book } from '@/interfaces'
 import { BASE_URL } from '@/util/constants'
+import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
 const URL = `${BASE_URL}/books`
@@ -20,7 +21,7 @@ export const getBooks = async () => {
 }
 export const getBook = async (id: string) => {
   try {
-    const res = await fetch(`${URL}/${id}`)
+    const res = await fetch(`${URL}/${id}`, { next: { tags: [`book-${id}`] } })
 
     if (!res.ok) {
       throw new Error('Failed to fetch book')
@@ -78,6 +79,45 @@ export const addBook = async (prevState: any, data: FormData) => {
         throw new Error('Failed to add book')
       }
       return res.json().then(() => revalidate('books'))
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const editBook = async (id: string, data: FormData) => {
+  try {
+    const bookData = Object.fromEntries(data)
+
+    const validatedFields = bookInputSchema.safeParse({
+      ...bookData,
+      book_price: Number(bookData.book_price),
+    })
+    console.log('🚀 ~ submitForm ~ validatedFields:', validatedFields)
+
+    if (!validatedFields.success) {
+      const error = {
+        errors: validatedFields.error.flatten().fieldErrors,
+      }
+
+      return error
+    } else {
+      const res = await fetch(`http://localhost:3000/api/books/${id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(validatedFields.data),
+      })
+
+      if (!res.ok) {
+        throw new Error('Failed to add book')
+      }
+      return res
+        .json()
+        .then(() => revalidate(`book-${id}`))
+        .then(() => revalidate('books'))
+        .then(() => redirect(`/library/books/${id}`))
     }
   } catch (error) {
     console.log(error)
