@@ -46,7 +46,9 @@ const bookInputSchema = z.object({
   ]),
   book_language: z.string().nonempty('Book Language is missing'),
   book_publisher: z.string().nonempty('Book Publisher is missing'),
-  book_price: z.number(),
+  book_price: z
+    .number()
+    .refine((value) => value > 0, { message: 'Price must be greater than 0' }),
   entry_date: z.string().nonempty('Entry Date is missing'),
 })
 
