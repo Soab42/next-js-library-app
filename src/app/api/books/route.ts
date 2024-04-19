@@ -3,6 +3,8 @@ import connectMongo from '@/lib/connectDb'
 import Book from '@/models/book'
 import { NextRequest, NextResponse } from 'next/server'
 
+export const dynamic = 'force-dynamic'
+
 export const GET = async () => {
   try {
     await connectMongo()
