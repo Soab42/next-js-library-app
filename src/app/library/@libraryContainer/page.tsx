@@ -1,9 +1,12 @@
 import LibraryContainer from '@/components/LibraryContainer'
+import { Suspense } from 'react'
 
 const LibrarySlot = () => {
   return (
     <div>
-      <LibraryContainer />
+      <Suspense>
+        <LibraryContainer />
+      </Suspense>
     </div>
   )
 }
