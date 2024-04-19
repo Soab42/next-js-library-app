@@ -13,8 +13,6 @@ const FormRow = ({
   const name = title.toLowerCase().split(' ').join('_')
   const value = book?.[name as keyof Book]
 
-  console.log(errors)
-
   const bookEditing = !!book
 
   return (
