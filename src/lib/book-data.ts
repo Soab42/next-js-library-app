@@ -4,7 +4,7 @@ import { BASE_URL } from '@/util/constants'
 import { redirect } from 'next/navigation'
 import { z } from 'zod'
 
-const URL = `/api/books`
+const URL = `${BASE_URL}/api/books`
 
 export const getBooks = async () => {
   console.log(URL)
@@ -22,7 +22,7 @@ export const getBooks = async () => {
 }
 export const getBook = async (id: string) => {
   try {
-    const res = await fetch(`/${id}`, { next: { tags: [`book-${id}`] } })
+    const res = await fetch(`${URL}/${id}`, { next: { tags: [`book-${id}`] } })
 
     if (!res.ok) {
       throw new Error('Failed to fetch book')
@@ -69,7 +69,7 @@ export const addBook = async (prevState: any, data: FormData) => {
 
       return error
     } else {
-      const res = await fetch('/api/books', {
+      const res = await fetch('http://dcclibproject.vercel.app/api/books', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
